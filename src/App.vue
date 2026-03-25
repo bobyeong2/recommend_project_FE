@@ -1,8 +1,23 @@
 <template>
-  <div class="bg-blue-500 text-white p-4 text-2xl">
-    Tailwind 작동 확인!
+  <div class="min-h-screen bg-surface">
+    <NavBar v-if="authStore.isLoggedIn" />
+    <main class="max-w-7xl mx-auto px-6 py-8">
+      <RouterView />
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { RouterView } from 'vue-router'
+import { useAuthStore } from './stores/auth'
+import NavBar from './components/NavBar.vue'
+
+const authStore = useAuthStore()
+
+onMounted(async () => {
+  if (authStore.token) {
+    await authStore.fetchUser()
+  }
+})
 </script>
