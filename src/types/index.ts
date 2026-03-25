@@ -51,18 +51,6 @@ export interface RatingWithMovie {
   updated_at: string
 }
 
-// 🎯 추천 아이템 (RecommendationItem)
-export interface RecommendationItem {
-  movie_id: number
-  title: string
-  predicted_rating: number   // NCF 모델이 예측한 평점
-}
-
-// 🎯 추천 응답 (RecommendationResponse)
-export interface RecommendationResponse {
-  user_id: number
-  recommendations: RecommendationItem[]
-}
 
 // 📊 평점 예측 요청
 export interface PredictionRequest {
@@ -79,4 +67,19 @@ export interface PredictionItem {
 export interface PredictionResponse {
   user_id: number
   predictions: PredictionItem[]
+}
+
+export interface RecommendationItem {
+  movie_id: number
+  title: string
+  predicted_rating: number
+  genres: string | null
+  reason: string | null
+  strategy: string | null
+}
+
+// 추천 응답
+export interface RecommendationResponse {
+  user_id: number
+  recommendations: RecommendationItem[]
 }
